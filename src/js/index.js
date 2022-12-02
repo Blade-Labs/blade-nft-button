@@ -4,36 +4,36 @@ import arrowImageData from '../img/arrow.svg';
 import btnImageData from '../img/blade-logo.svg';
 
 import {isMobile, translate} from "./utils.js";
-import {attributes} from "./models.js"
+import {attributes} from "./models.js";
+
+const SELECTOR = "blade-nft-purchase";
 
 class BladeAirdrop {
   constructor() {
     this.overlay;
     this.stateAttribute = "data-waiting";
     this.isBladeInstalled = false;
-    this.init();
-  }
-
-  init() {
     document.addEventListener("hederaWalletLoaded", () => {
       this.isBladeInstalled = true;
-    })
+    });
 
-    document.querySelectorAll(".blade-nft-purchase")
-      .forEach(ph => {
-        const btn = document.createElement("button");
-        btn.innerHTML = translate("btnLabelConnect");
-        btn.className = "blade-nft-purchase__btn"
-        btn.type = "button";
-        const img = document.createElement("img");
-        img.src = btnImageData;
-        img.className = "blade-nft-purchase__btn-img";
-        btn.prepend(img);
+    document.querySelectorAll(`.${SELECTOR}`).forEach(this.createButton.bind(this));
+    this.observeNewPlaceholders();
+  }
 
-        ph.setAttribute(this.stateAttribute, false)
-        ph.appendChild(btn);
-        this.addBtnListener(btn, ph);
-      });
+  createButton(placeholder) {
+    const btn = document.createElement("button");
+    btn.innerHTML = translate("btnLabelConnect");
+    btn.className = `${SELECTOR}__btn`
+    btn.type = "button";
+    const img = document.createElement("img");
+    img.src = btnImageData;
+    img.className = `${SELECTOR}__btn-img`;
+    btn.prepend(img);
+
+    placeholder.setAttribute(this.stateAttribute, false)
+    placeholder.appendChild(btn);
+    this.addBtnListener(btn, placeholder);
   }
 
   addBtnListener(btn, ph) {
@@ -59,17 +59,17 @@ class BladeAirdrop {
 
   createOverlay() {
     this.overlay = document.createElement("div");
-    this.overlay.className = "blade-nft-purchase__overlay";
+    this.overlay.className = `${SELECTOR}__overlay`;
     document.body.appendChild(this.overlay);
 
     const popup = document.createElement("div");
-    popup.className = "blade-nft-purchase__popup";
+    popup.className = `${SELECTOR}__popup`;
     popup.innerHTML = translate("popupMessage");
     this.overlay.appendChild(popup);
 
     const img = document.createElement("img");
     img.src = arrowImageData;
-    img.className = "blade-nft-purchase__popup-img";
+    img.className = `${SELECTOR}__popup-img`;
     popup.prepend(img);
   }
 
@@ -117,6 +117,25 @@ class BladeAirdrop {
     });
 
     observer.observe(ph, {attributes: true, attributeFilter: ["data-waiting"]});
+  }
+
+  observeNewPlaceholders() {
+    const observer = new MutationObserver((mutations) => {
+      const placeholders = [];
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.ELEMENT_NODE) {
+            placeholders.push(...node.querySelectorAll(`.${SELECTOR}`));
+            if (node.classList.contains(SELECTOR)) {
+              placeholders.push(node);
+            }
+          }
+        });
+      });
+      placeholders.forEach(this.createButton.bind(this));
+    });
+
+    observer.observe(document, {childList: true, subtree: true});
   }
 }
 

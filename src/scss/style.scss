@@ -1,26 +1,28 @@
-$background: #1d1c1d;
-$text: #ffffff;
-$border: #EEEEEE;
+$background: #f45f23;
+$text: #000000;
 
 .blade-nft-purchase {
   /* btn */
   &__btn {
-    padding: 12px;
-    border: 2px solid $border;
-    border-radius: 16px;
+    width: 100%;
+    padding: 0.8em;
+    border: none;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     color: $text;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1em;
     background-color: $background !important;
+    cursor: pointer;
   }
 
   &__btn-img {
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.4em;
+    display: none; // Will be changed
   }
 
   /* overlay/popup */
@@ -48,8 +50,8 @@ $border: #EEEEEE;
     border-radius: 16px;
     color: $text;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 1em;
+    line-height: 1.4;
     text-align: center;
   }
 

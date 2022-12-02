@@ -1,4 +1,4 @@
 export default {
-  btnLabelConnect: "Purchase with Blade Wallet",
-  popupMessage: "After installation please go to your browser extensions panel and click on Blade Wallet icon, complete setup, refresh this page and connect to your Blade Wallet."
+  btnLabelConnect: "Purchase with Blade",
+  popupMessage: "Click on Blade Wallet icon from your browser extensions panel and follow instructions."
 }
