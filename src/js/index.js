@@ -124,7 +124,7 @@ class BladeAirdrop {
       const placeholders = [];
       mutations.forEach(mutation => {
         mutation.addedNodes.forEach(node => {
-          if (node.ELEMENT_NODE) {
+          if (node.nodeType === node.ELEMENT_NODE) {
             placeholders.push(...node.querySelectorAll(`.${SELECTOR}`));
             if (node.classList.contains(SELECTOR)) {
               placeholders.push(node);
