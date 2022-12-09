@@ -67,10 +67,10 @@ class BladeAirdrop {
     popup.innerHTML = translate("popupMessage");
     this.overlay.appendChild(popup);
 
-    const img = document.createElement("img");
-    img.src = arrowImageData;
-    img.className = `${SELECTOR}__popup-img`;
-    popup.prepend(img);
+    // const img = document.createElement("img");
+    // img.src = arrowImageData;
+    // img.className = `${SELECTOR}__popup-img`;
+    // popup.prepend(img);
   }
 
   generateDeeplink(ph) {
