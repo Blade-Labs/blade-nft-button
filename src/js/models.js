@@ -17,7 +17,7 @@ export const attributes = [
   {
     attr: "tokenId",
     required: true,
-    paramsTag: "token_id"
+    paramsTag: "tokenId"
   },
   {
     attr: "serial",
