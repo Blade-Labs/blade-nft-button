@@ -85,7 +85,7 @@ class BladeAirdrop {
     }
 
     deeplink.search = encodeURIComponent(deeplink.search).replace("%3F", "");
-    return firebase + deeplink + "&apn=org.bladelabs.wallet"; //&isi=1623849951&ibi=org.bladelabs.bladewallet"
+    return firebase + deeplink + "&apn=org.bladelabs.wallet&isi=1623849951&ibi=org.bladelabs.bladewallet";
   }
 
   getAttributes(ph) {
